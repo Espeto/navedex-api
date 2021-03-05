@@ -1,0 +1,17 @@
+{
+  "type": "postgres",
+  "host": "",
+  "port": 5432,
+  "username": "docker",
+  "password": "docker",
+  "database": "",
+  "migrations": [
+    "./src/database/migrations/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "./src/database/migrations"
+  },
+  "entities": [
+    "./src/models/*.ts"
+  ]
+}
