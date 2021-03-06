@@ -24,7 +24,7 @@ export default class AddUserIdToNaver1615061797636
         referencedTableName: 'users',
         name: 'NaverUser',
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       }),
     );
   }

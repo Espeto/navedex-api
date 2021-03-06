@@ -24,7 +24,7 @@ export default class AddUserIdToProjects1615061078838
         referencedTableName: 'users',
         name: 'ProjectUser',
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       }),
     );
   }
