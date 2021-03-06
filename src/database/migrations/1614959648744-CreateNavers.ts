@@ -29,6 +29,16 @@ export default class CreateNavers1614959648744 implements MigrationInterface {
             name: 'job_role',
             type: 'varchar',
           },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
         ],
       }),
     );

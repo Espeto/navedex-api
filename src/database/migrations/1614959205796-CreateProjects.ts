@@ -17,6 +17,16 @@ export default class CreateProjects1614959205796 implements MigrationInterface {
             name: 'name',
             type: 'varchar',
           },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
         ],
       }),
     );
