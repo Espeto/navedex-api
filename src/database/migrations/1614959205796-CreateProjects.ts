@@ -23,7 +23,7 @@ export default class CreateProjects1614959205796 implements MigrationInterface {
             default: 'now()',
           },
           {
-            name: 'created_at',
+            name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
           },
