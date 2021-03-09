@@ -25,7 +25,7 @@ class Naver {
   birthdate: Date;
 
   @Column('date')
-  admission__date: Date;
+  admission_date: Date;
 
   @Column()
   job_role: string;
