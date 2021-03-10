@@ -34,7 +34,7 @@ naversRouter.get('/show/:id', async (request, response) => {
 
   const naversRepository = getCustomRepository(NaversRepository);
 
-  const naver = await naversRepository.findById({ owner_id, id });
+  const naver = await naversRepository.detailNaverById({ owner_id, id });
 
   return response.json(naver);
 });
