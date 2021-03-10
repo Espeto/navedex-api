@@ -4,6 +4,7 @@ import Naver from '../models/Naver';
 import Project from '../models/Project';
 
 import NaversRepository from '../repositories/NaversRepository';
+import ProjectsRepository from '../repositories/ProjectsRepository';
 
 interface Request {
   name: string;
@@ -24,18 +25,14 @@ class CreateNaverService {
     owner_id,
   }: Request): Promise<Naver> {
     const naversRepository = getCustomRepository(NaversRepository);
-    const projectsRepository = getRepository(Project);
+    const projectsRepository = getCustomRepository(ProjectsRepository);
 
-    let projects: Project[] = await projectsRepository.find({
+    const projects: Project[] = await projectsRepository.find({
       where: {
         id: In(projectsId),
         owner_id,
       },
     });
-
-    if (!projects) {
-      projects = [];
-    }
 
     const naver = naversRepository.create({
       name,
