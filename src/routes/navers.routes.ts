@@ -2,7 +2,10 @@ import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+
 import CreateNaverService from '../services/CreateNaverService';
+import UpdateNaverService from '../services/UpdateNaverService';
+
 import NaversRepository from '../repositories/NaversRepository';
 
 const naversRouter = Router();
@@ -49,6 +52,26 @@ naversRouter.post('/store', async (request, response) => {
     job_role,
     projectsId: projects,
     owner_id,
+  });
+
+  return response.json(naver);
+});
+
+naversRouter.put('/update/:id', async (request, response) => {
+  const { name, birthdate, admission_date, job_role, projects } = request.body;
+  const { id } = request.params;
+  const owner_id = request.user.id;
+
+  const updateNaverService = new UpdateNaverService();
+
+  const naver = await updateNaverService.execute({
+    owner_id,
+    id,
+    name,
+    birthdate,
+    admission_date,
+    job_role,
+    projects,
   });
 
   return response.json(naver);
