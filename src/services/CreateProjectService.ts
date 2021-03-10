@@ -1,8 +1,9 @@
-import { getCustomRepository, getRepository, In } from 'typeorm';
+import { getCustomRepository, In } from 'typeorm';
 
 import Project from '../models/Project';
 
 import NaversRepository from '../repositories/NaversRepository';
+import ProjectsRepository from '../repositories/ProjectsRepository';
 
 interface Request {
   owner_id: number;
@@ -16,7 +17,7 @@ class CreateProjectService {
     name,
     naversIds,
   }: Request): Promise<Project> {
-    const projectsRepository = getRepository(Project);
+    const projectsRepository = getCustomRepository(ProjectsRepository);
     const naversRepository = getCustomRepository(NaversRepository);
 
     const navers = await naversRepository.find({
