@@ -3,6 +3,7 @@ import { getCustomRepository } from 'typeorm';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import CreateProjectService from '../services/CreateProjectService';
+import UpdateProjectService from '../services/UpdateProjectService';
 
 import ProjectsRepository from '../repositories/ProjectsRepository';
 
@@ -44,6 +45,23 @@ projectsRouter.post('/', async (request, response) => {
     owner_id,
     name,
     naversIds: navers,
+  });
+
+  return response.json(project);
+});
+
+projectsRouter.put('/:id', async (request, response) => {
+  const { id } = request.params;
+  const { name, naversIds } = request.body;
+  const owner_id = request.user.id;
+
+  const updateProjectService = new UpdateProjectService();
+
+  const project = await updateProjectService.execute({
+    owner_id,
+    id,
+    name,
+    naversIds,
   });
 
   return response.json(project);
