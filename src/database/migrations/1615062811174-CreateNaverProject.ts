@@ -1,10 +1,7 @@
-import { query } from 'express';
 import {
   MigrationInterface,
   QueryRunner,
   Table,
-  TableColumn,
-  TableExclusion,
   TableForeignKey,
 } from 'typeorm';
 
@@ -13,31 +10,31 @@ export default class CreateNaverProject1615062811174
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'naver_projects_project',
+        name: 'navers_projects_projects',
         columns: [
           {
-            name: 'naverId',
+            name: 'naversId',
             type: 'int',
           },
           {
-            name: 'projectId',
+            name: 'projectsId',
             type: 'int',
           },
         ],
       }),
     );
 
-    await queryRunner.createForeignKeys('naver_projects_project', [
+    await queryRunner.createForeignKeys('navers_projects_projects', [
       new TableForeignKey({
-        columnNames: ['naverId'],
+        columnNames: ['naversId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'navers',
-        name: 'ProjectsNaver',
+        name: 'ProjectsNavers',
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       }),
       new TableForeignKey({
-        columnNames: ['projectId'],
+        columnNames: ['projectsId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'projects',
         name: 'ProjectsProject',
@@ -46,14 +43,14 @@ export default class CreateNaverProject1615062811174
       }),
     ]);
 
-    await queryRunner.createPrimaryKey('naver_projects_project', [
-      'naverId',
-      'projectId',
+    await queryRunner.createPrimaryKey('navers_projects_projects', [
+      'naversId',
+      'projectsId',
     ]);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropPrimaryKey('naver_projects_project');
-    await queryRunner.dropTable('naver_projects_project');
+    await queryRunner.dropPrimaryKey('navers_projects_projects');
+    await queryRunner.dropTable('navers_projects_projects');
   }
 }
