@@ -29,7 +29,7 @@ class UpdateNaverService {
   }: Request): Promise<Naver> {
     const naversRepository = getCustomRepository(NaversRepository);
 
-    const naver = await naversRepository.findById({ owner_id, id });
+    const naver = await naversRepository.findNaverById({ owner_id, id });
 
     if (!naver) {
       throw new AppError('Naver not found', 404);

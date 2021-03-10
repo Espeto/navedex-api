@@ -1,4 +1,4 @@
-import { getRepository, getCustomRepository, In } from 'typeorm';
+import { getCustomRepository, In } from 'typeorm';
 
 import Naver from '../models/Naver';
 import Project from '../models/Project';

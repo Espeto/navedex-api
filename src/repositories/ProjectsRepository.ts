@@ -31,7 +31,7 @@ class ProjectsRepository extends Repository<Project> {
     return findProjects || null;
   }
 
-  public async detailProjectById({
+  public async findProjectById({
     owner_id,
     id,
   }: FindIdRequest): Promise<Project | null> {

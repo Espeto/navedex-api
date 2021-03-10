@@ -5,13 +5,14 @@ import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 import CreateNaverService from '../services/CreateNaverService';
 import UpdateNaverService from '../services/UpdateNaverService';
+import DeleteNaverService from '../services/DeleteNaverService';
 
 import NaversRepository from '../repositories/NaversRepository';
 
 const naversRouter = Router();
 naversRouter.use(ensureAuthenticated);
 
-naversRouter.get('/index', async (request, response) => {
+naversRouter.get('/', async (request, response) => {
   const { name, company_time, job_role } = request.query;
 
   const owner_id = request.user.id;
@@ -28,18 +29,18 @@ naversRouter.get('/index', async (request, response) => {
   return response.json(navers);
 });
 
-naversRouter.get('/show/:id', async (request, response) => {
+naversRouter.get('/:id', async (request, response) => {
   const { id } = request.params;
   const owner_id = request.user.id;
 
   const naversRepository = getCustomRepository(NaversRepository);
 
-  const naver = await naversRepository.detailNaverById({ owner_id, id });
+  const naver = await naversRepository.findNaverById({ owner_id, id });
 
   return response.json(naver);
 });
 
-naversRouter.post('/store', async (request, response) => {
+naversRouter.post('/', async (request, response) => {
   const { name, birthdate, admission_date, job_role, projects } = request.body;
   const owner_id = request.user.id;
 
@@ -57,7 +58,7 @@ naversRouter.post('/store', async (request, response) => {
   return response.json(naver);
 });
 
-naversRouter.put('/update/:id', async (request, response) => {
+naversRouter.put('/:id', async (request, response) => {
   const { name, birthdate, admission_date, job_role, projects } = request.body;
   const { id } = request.params;
   const owner_id = request.user.id;
@@ -75,6 +76,17 @@ naversRouter.put('/update/:id', async (request, response) => {
   });
 
   return response.json(naver);
+});
+
+naversRouter.delete('/:id', async (request, response) => {
+  const { id } = request.params;
+  const owner_id = request.user.id;
+
+  const deleteNaverService = new DeleteNaverService();
+
+  await deleteNaverService.execute({ owner_id, id });
+
+  return response.status(204).send();
 });
 
 export default naversRouter;

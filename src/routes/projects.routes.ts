@@ -9,32 +9,32 @@ import ProjectsRepository from '../repositories/ProjectsRepository';
 const projectsRouter = Router();
 projectsRouter.use(ensureAuthenticated);
 
-projectsRouter.get('/index', async (request, response) => {
-  const { name } = request.body;
+projectsRouter.get('/', async (request, response) => {
+  const { name } = request.query;
   const owner_id = request.user.id;
 
   const projectsRepository = getCustomRepository(ProjectsRepository);
 
-  const projects = projectsRepository.filterProjects({
-    name,
+  const projects = await projectsRepository.filterProjects({
+    name: name as string,
     owner_id,
   });
 
   return response.json(projects);
 });
 
-projectsRouter.get('/show/:id', async (request, response) => {
+projectsRouter.get('/:id', async (request, response) => {
   const { id } = request.params;
   const owner_id = request.user.id;
 
   const projectsRepository = getCustomRepository(ProjectsRepository);
 
-  const project = projectsRepository.detailProjectById({ owner_id, id });
+  const project = await projectsRepository.findProjectById({ owner_id, id });
 
   return response.json(project);
 });
 
-projectsRouter.post('/store', async (request, response) => {
+projectsRouter.post('/', async (request, response) => {
   const { name, navers } = request.body;
   const owner_id = request.user.id;
 

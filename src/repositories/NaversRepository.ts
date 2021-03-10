@@ -48,7 +48,7 @@ class NaversRepository extends Repository<Naver> {
     return findNavers || null;
   }
 
-  public async detailNaverById({
+  public async findNaverById({
     owner_id,
     id,
   }: FindIdRequest): Promise<Naver | null> {
