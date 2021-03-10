@@ -37,7 +37,7 @@ class Naver {
   @JoinColumn({ name: 'owner_id' })
   owner: User;
 
-  @ManyToMany(() => Project)
+  @ManyToMany(() => Project, project => project.navers)
   @JoinTable()
   projects: Project[];
 

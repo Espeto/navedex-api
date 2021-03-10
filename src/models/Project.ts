@@ -6,9 +6,11 @@ import {
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
 } from 'typeorm';
 
 import User from './User';
+import Naver from './Naver';
 
 @Entity('projects')
 class Project {
@@ -24,6 +26,9 @@ class Project {
   @ManyToOne(() => User)
   @JoinColumn({ name: 'owner_id' })
   owner: User;
+
+  @ManyToMany(() => Naver, naver => naver.projects)
+  navers: Naver[];
 
   @CreateDateColumn()
   created_at: Date;
