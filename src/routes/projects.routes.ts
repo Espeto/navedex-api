@@ -52,7 +52,7 @@ projectsRouter.post('/', async (request, response) => {
 
 projectsRouter.put('/:id', async (request, response) => {
   const { id } = request.params;
-  const { name, naversIds } = request.body;
+  const { name, navers } = request.body;
   const owner_id = request.user.id;
 
   const updateProjectService = new UpdateProjectService();
@@ -61,7 +61,7 @@ projectsRouter.put('/:id', async (request, response) => {
     owner_id,
     id,
     name,
-    naversIds,
+    naversIds: navers,
   });
 
   return response.json(project);
