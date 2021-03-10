@@ -57,9 +57,8 @@ class NaversRepository extends Repository<Naver> {
         owner_id,
         id,
       },
+      relations: ['projects'],
     });
-
-    console.log(findNaver);
 
     return findNaver || null;
   }
