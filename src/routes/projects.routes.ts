@@ -4,6 +4,7 @@ import { getCustomRepository } from 'typeorm';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import CreateProjectService from '../services/CreateProjectService';
 import UpdateProjectService from '../services/UpdateProjectService';
+import DeleteProjectService from '../services/DeleteProjectService';
 
 import ProjectsRepository from '../repositories/ProjectsRepository';
 
@@ -65,6 +66,17 @@ projectsRouter.put('/:id', async (request, response) => {
   });
 
   return response.json(project);
+});
+
+projectsRouter.delete('/:id', async (request, response) => {
+  const { id } = request.params;
+  const owner_id = request.user.id;
+
+  const deleteProjectService = new DeleteProjectService();
+
+  await deleteProjectService.execute({ owner_id, id });
+
+  return response.status(204).send();
 });
 
 export default projectsRouter;
