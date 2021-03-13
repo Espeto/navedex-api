@@ -28,7 +28,7 @@ class NaversRepository extends Repository<Naver> {
     ).where('navers.owner_id = :owner_id', { owner_id });
 
     if (name) {
-      filteredQuery.andWhere('navers.name = :name', { name });
+      filteredQuery.andWhere('navers.name ilike :name', { name: `%${name}%` });
     }
 
     if (job_role) {
