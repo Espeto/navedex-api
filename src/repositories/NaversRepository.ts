@@ -1,4 +1,4 @@
-import { parseISO, format } from 'date-fns';
+import { format, add } from 'date-fns';
 import { EntityRepository, Repository } from 'typeorm';
 
 import Naver from '../models/Naver';
@@ -36,7 +36,11 @@ class NaversRepository extends Repository<Naver> {
     }
 
     if (company_time) {
-      const parsedDate = format(parseISO(company_time), 'yyyy-MM-dd');
+      const getDate = add(new Date(), {
+        months: parseInt(company_time, 10) * -1,
+      });
+
+      const parsedDate = format(getDate, 'yyyy-MM-dd');
 
       filteredQuery.andWhere('navers.admission_date >= :company_time', {
         company_time: parsedDate,
