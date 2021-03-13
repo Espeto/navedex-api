@@ -23,7 +23,9 @@ class ProjectsRepository extends Repository<Project> {
     ).where('projects.owner_id = :owner_id', { owner_id });
 
     if (name) {
-      filteredQuery.andWhere('projects.name = :name', { name });
+      filteredQuery.andWhere('projects.name ilike :name', {
+        name: `%${name}%`,
+      });
     }
 
     const findProjects = await filteredQuery.getMany();
