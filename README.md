@@ -9,7 +9,7 @@ yarn
 
 ## Configuração
 O arquivo *ormconfig.json* contem as configuração de conexão com o banco de dados.
-O campo *database* é referente ao nome do banco de dados dentro do Banco de Dados (por padrão
+O campo *database* é referente ao nome da base de dados dentro do BD (por padrão
 o BD vem com o *public*)
 
 O projeto possui um arquivo no formato json para importação da API no Insomnia.
@@ -33,6 +33,7 @@ yarn dev:server
 
 **Naver**
 - Index: `GET /navers`
+  > A busca por tempo de empresa está em meses
 - Show: `GET /navers/:id`
 - Store: `POST /navers`
 - Update: `PUT /navers/:id`
